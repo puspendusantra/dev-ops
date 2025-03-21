@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Tools - Mithun Technologies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        :root {
+            --color-bg1: rgb(90, 0, 140);
+            --color-bg2: rgb(0, 10, 68);
+            --color1: 10, 98, 155;
+            --color2: 190, 50, 198;
+            --color3: 89, 86, 180;
+            --color4: 150, 330, 400;
+            --color5: 130, 106, 40;
+            --color-interactive: 120, 80, 185;
+            --circle-size: 80%;
+            --blending: hard-light;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        /* Animated Background Styles */
+        .gradient-bg {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            overflow: hidden;
+            background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .gradient-bg svg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .gradients-container {
+            filter: url(#goo) blur(40px);
+            width: 100%;
+            height: 100%;
+        }
+
+        .g1 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2);
+            left: calc(50% - var(--circle-size) / 2);
+            transform-origin: center center;
+            animation: moveVertical 30s ease infinite;
+            opacity: 1;
+        }
+
+        .g2 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2);
+            left: calc(50% - var(--circle-size) / 2);
+            transform-origin: calc(50% - 400px);
+            animation: moveInCircle 20s reverse infinite;
+            opacity: 1;
+        }
+
+        .g3 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2 + 200px);
+            left: calc(50% - var(--circle-size) / 2 - 500px);
+            transform-origin: calc(50% + 400px);
+            animation: moveInCircle 40s linear infinite;
+            opacity: 1;
+        }
+
+        .g4 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2);
+            left: calc(50% - var(--circle-size) / 2);
+            transform-origin: calc(50% - 200px);
+            animation: moveHorizontal 40s ease infinite;
+            opacity: 0.7;
+        }
+
+        .g5 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+            width: calc(var(--circle-size) * 2);
+            height: calc(var(--circle-size) * 2);
+            top: calc(50% - var(--circle-size));
+            left: calc(50% - var(--circle-size));
+            transform-origin: calc(50% - 800px) calc(50% + 200px);
+            animation: moveInCircle 20s ease infinite;
+            opacity: 1;
+        }
+
+        .interactive {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+            width: 100%;
+            height: 100%;
+            top: -50%;
+            left: -50%;
+            opacity: 0.7;
+        }
+
+        @keyframes moveInCircle {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes moveVertical {
+            0% { transform: translateY(-50%); }
+            50% { transform: translateY(50%); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes moveHorizontal {
+            0% { transform: translateX(-50%) translateY(-10%); }
+            50% { transform: translateX(50%) translateY(10%); }
+            100% { transform: translateX(-50%) translateY(-10%); }
+        }
+
+        /* Glass Table Styles */
+        .glass-table {
+            position: relative;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.001);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+            max-width: 95%;
+            z-index: 1;
+            scroll-behavior: smooth; /* Smooth scrolling animation */
+        }
+
+        table {
+            width: max-content;
+            min-width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Button Styles */
+        .table-button {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 20px;
+            border-radius: 9999rem;
+            background: color-mix(in oklab, white, transparent 95%);
+            backdrop-filter: blur(6px);
+            position: relative;
+            text-decoration: none;
+            transition: all 200ms ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-button::before {
+            content: '';
+            border-radius: inherit;
+            background: color-mix(in oklab, white, transparent 90%);
+            position: absolute;
+            inset: 0;
+            transform: translate(0, 4px);
+            filter: blur(4px);
+            z-index: -1;
+            transition: all 200ms ease-out;
+        }
+
+        .table-button:hover {
+            transform: scale(1.05);
+            background: color-mix(in oklab, white, transparent 90%);
+        }
+
+        .table-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .glass-table {
+                max-width: 95%;
+            }
+
+            th:nth-child(5), th:nth-child(6),
+            td:nth-child(5), td:nth-child(6) {
+                display: none;
+            }
+
+            th, td {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .table-button {
+                font-size: 12px;
+                padding: 6px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            th, td {
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            .table-button {
+                font-size: 11px;
+                padding: 5px 12px;
+            }
+        }
+
+        /* Orientation-specific fixes */
+        @media (orientation: portrait) and (max-width: 768px) {
+            .glass-table {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                min-width: 120%; /* Force horizontal scroll in portrait */
+            }
+        }
+
+        @media (orientation: landscape) and (max-width: 768px) {
+            th:nth-child(5), th:nth-child(6),
+            td:nth-child(5), td:nth-child(6) {
+                display: table-cell; /* Show columns in landscape */
+            }
+        }
+
+        /* Buy Me Coffee Button */
+        .bmc-button {
+            line-height: 36px !important;
+            height: 37px !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            color: #ffffff !important;
+            background-color: rgba(var(--color-interactive), 0.2) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border-radius: 3px !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            padding: 1px 9px !important;
+            font-size: 23px !important;
+            letter-spacing: 0.6px !important;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2) !important;
+            margin: 20px auto !important;
+            font-family: 'Cookie', cursive !important;
+            transition: all 200ms ease-out !important;
+        }
+
+        .bmc-button img {
+            width: 27px !important;
+            margin-bottom: 1px !important;
+            box-shadow: none !important;
+            border: none !important;
+            vertical-align: middle !important;
+        }
+
+        .bmc-button:hover {
+            background-color: rgba(var(--color-interactive), 0.3) !important;
+            transform: scale(1.05);
+        }
+
+        .bmc-button:active {
+            transform: scale(0.95);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="gradient-bg">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="gradients-container">
+            <div class="g1"></div>
+            <div class="g2"></div>
+            <div class="g3"></div>
+            <div class="g4"></div>
+            <div class="g5"></div>
+            <div class="interactive"></div>
+        </div>
+    </div>
+
+    <!-- Glass Table -->
+    <div class="glass-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Software Download URL</th>
+                    <th>Vendor</th>
+                    <th>Earlier Versions</th>
+                    <th>Version</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- AWS -->
+                <tr>
+                    <td>AWS</td>
+                    <td>Platform as A Service</td>
+                    <td>
+                        <a href="https://console.aws.amazon.com" target="_blank" class="table-button">
+                            Register in AWS
+                        </a>
+                    </td>
+                    <td>Amazon</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Azure -->
+                <tr>
+                    <td>Azure</td>
+                    <td>Platform as A Service</td>
+                    <td>
+                        <a href="https://portal.azure.com" target="_blank" class="table-button">
+                            Register in Azure
+                        </a>
+                    </td>
+                    <td>Microsoft</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- GCP -->
+                <tr>
+                    <td>GCP</td>
+                    <td>Platform as A Service</td>
+                    <td>
+                        <a href="https://console.cloud.google.com" target="_blank" class="table-button">
+                            Register in GCP
+                        </a>
+                    </td>
+                    <td>Google</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- IBM -->
+                <tr>
+                    <td>IBM</td>
+                    <td>Platform as A Service</td>
+                    <td>
+                        <a href="https://cloud.ibm.com/registration" target="_blank" class="table-button">
+                            Register in IBM Cloud
+                        </a>
+                    </td>
+                    <td>IBM</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Puttygen -->
+                <tr>
+                    <td>Puttygen for Windows 64 Bit Machine</td>
+                    <td>RSA and DSA key generation utility</td>
+                    <td>
+                        <a href="https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Putty -->
+                <tr>
+                    <td>Putty for Windows 64 Bit Machine</td>
+                    <td>SSH Tool</td>
+                    <td>
+                        <a href="https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Mobaxterm -->
+                <tr>
+                    <td>Mobaxterm</td>
+                    <td>SSH Tool</td>
+                    <td>
+                        <a href="https://mobaxterm.mobatek.net/download-home-edition.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- WinSCP -->
+                <tr>
+                    <td>WinSCP</td>
+                    <td>FTP Tool</td>
+                    <td>
+                        <a href="https://winscp.net/download/WinSCP-5.13-Setup.exe" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Filezilla -->
+                <tr>
+                    <td>Filezilla</td>
+                    <td>FTP Tool</td>
+                    <td>
+                        <a href="https://filezilla-project.org/download.php?type=client" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- GitBash -->
+                <tr>
+                    <td>GitBash</td>
+                    <td>Client</td>
+                    <td>
+                        <a href="https://git-scm.com/downloads" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Git</td>
+                    <td>2.13.5</td>
+                    <td>2.13.5</td>
+                </tr>
+                <!-- GitHub -->
+                <tr>
+                    <td>GitHub</td>
+                    <td>Code Repository</td>
+                    <td>
+                        <a href="https://github.com/" target="_blank" class="table-button">
+                            Register in GitHub
+                        </a>
+                    </td>
+                    <td>NA</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <!-- GitLab -->
+                <tr>
+                    <td>GitLab</td>
+                    <td>Code Repository</td>
+                    <td>
+                        <a href="https://gitlab.com/users/sign_in#register-pane" target="_blank" class="table-button">
+                            Register in GitLab
+                        </a>
+                    </td>
+                    <td>NA</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <!-- BitBucket -->
+                <tr>
+                    <td>BitBucket</td>
+                    <td>Code Repository</td>
+                    <td>
+                        <a href="https://id.atlassian.com/signup" target="_blank" class="table-button">
+                            Register in BitBucket
+                        </a>
+                    </td>
+                    <td>NA</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <!-- JDK -->
+                <tr>
+                    <td>JDK</td>
+                    <td>Software Development</td>
+                    <td>
+                        <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Oracle</td>
+                    <td>1.8.0_151</td>
+                    <td>1.8.0_151</td>
+                </tr>
+                <!-- Notepad++ -->
+                <tr>
+                    <td>Notepad++ - Windows</td>
+                    <td>Editor</td>
+                    <td>
+                        <a href="https://notepad-plus-plus.org/downloads/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>NA</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <!-- Visual Studio Code -->
+                <tr>
+                    <td>Visual Studio Code</td>
+                    <td>Editor</td>
+                    <td>
+                        <a href="https://code.visualstudio.com/Download" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Microsoft</td>
+                    <td>1.38</td>
+                    <td>NA</td>
+                </tr>
+                <!-- Eclipse -->
+                <tr>
+                    <td>Eclipse</td>
+                    <td>Integrated Development Environment (IDE)</td>
+                    <td>
+                        <a href="https://www.eclipse.org/downloads/packages/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>NA</td>
+                </tr>
+                <!-- PyCharm -->
+                <tr>
+                    <td>PyCharm</td>
+                    <td>Editor</td>
+                    <td>
+                        <a href="https://www.jetbrains.com/pycharm/download/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>JET BRAINS</td>
+                    <td>2020.2.2</td>
+                    <td>NA</td>
+                </tr>
+                <!-- IntelliJ -->
+                <tr>
+                    <td>IntelliJ</td>
+                    <td>Editor</td>
+                    <td>
+                        <a href="https://www.jetbrains.com/idea/download/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>JET BRAINS</td>
+                    <td></td>
+                    <td>NA</td>
+                </tr>
+                <!-- Python -->
+                <tr>
+                    <td>Python</td>
+                    <td>Language</td>
+                    <td>
+                        <a href="https://www.python.org/downloads/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Python Community</td>
+                    <td></td>
+                    <td>NA</td>
+                </tr>
+                <!-- Ant -->
+                <tr>
+                    <td>Ant</td>
+                    <td>Build Tool</td>
+                    <td>
+                        <a href="http://ant.apache.org/bindownload.cgi" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Apache Software Foundation</td>
+                    <td>1.10.1</td>
+                    <td>1.10.1</td>
+                </tr>
+                <!-- Maven -->
+                <tr>
+                    <td>Maven</td>
+                    <td>Build Tool</td>
+                    <td>
+                        <a href="https://maven.apache.org/download.cgi" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Apache Software Foundation</td>
+                    <td>3.5.2</td>
+                    <td>3.5.2</td>
+                </tr>
+                <!-- Gradle -->
+                <tr>
+                    <td>Gradle</td>
+                    <td>Build Tool</td>
+                    <td>
+                        <a href="https://services.gradle.org/distributions/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Apache Software Foundation</td>
+                    <td>4.3</td>
+                    <td>4.3</td>
+                </tr>
+                <!-- Tomcat -->
+                <tr>
+                    <td>Tomcat</td>
+                    <td>Application Server</td>
+                    <td>
+                        <a href="http://tomcat.apache.org/download-90.cgi" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Apache Software Foundation</td>
+                    <td>8.5.23</td>
+                    <td>8.5.23</td>
+                </tr>
+                <!-- Apache HTTP Server -->
+                <tr>
+                    <td>Apache HTTP Server</td>
+                    <td>HTTP Server</td>
+                    <td>
+                        <a href="https://www.apachelounge.com/download/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Apache</td>
+                    <td>2.4.33</td>
+                    <td>2.4.33</td>
+                </tr>
+                <!-- Wildfly -->
+                <tr>
+                    <td>Wildfly</td>
+                    <td>Application Server</td>
+                    <td>
+                        <a href="http://wildfly.org/downloads/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>RedHat Community</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- JBoss -->
+                <tr>
+                    <td>JBoss</td>
+                    <td>Application Server</td>
+                    <td>
+                        <a href="http://jbossas.jboss.org/downloads" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>RedHat Community</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- SonarQube -->
+                <tr>
+                    <td>SonarQube</td>
+                    <td>Code Quality Analyzer Tool</td>
+                    <td>
+                        <a href="https://www.sonarqube.org/downloads/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Sonar</td>
+                    <td>6.6</td>
+                    <td>6.6</td>
+                </tr>
+                <!-- SonarScanner -->
+                <tr>
+                    <td>SonarScanner</td>
+                    <td>Code Scanner</td>
+                    <td>
+                        <a href="https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td>3.0.3.778</td>
+                    <td>3.0.3.778</td>
+                </tr>
+                <!-- SonarQube Cloud -->
+                <tr>
+                    <td>SonarQube Cloud</td>
+                    <td>Code Quality Analyzer Tool</td>
+                    <td>
+                        <a href="https://sonarcloud.io/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <!-- PostgreSQL DB Server -->
+                <tr>
+                    <td>PostgreSQL DB Server</td>
+                    <td>Database</td>
+                    <td>
+                        <a href="https://www.postgresql.org/download/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- SQL Workbench/J -->
+                <tr>
+                    <td>SQL Workbench/J</td>
+                    <td>DB Client</td>
+                    <td>
+                        <a href="https://www.sql-workbench.eu/downloads.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- DBeaver -->
+                <tr>
+                    <td>DBeaver</td>
+                    <td>DB Client</td>
+                    <td>
+                        <a href="https://dbeaver.io/download/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td>DBeaver Community</td>
+                    <td></td>
+                </tr>
+                <!-- Nexus -->
+                <tr>
+                    <td>Nexus</td>
+                    <td>Artifactory Repository</td>
+                    <td>
+                        <a href="https://help.sonatype.com/repomanager3/download/download-archives---repository-manager-3" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td>Sonatype</td>
+                    <td></td>
+                </tr>
+                <!-- JFrog Artifactory -->
+                <tr>
+                    <td>JFrog Artifactory</td>
+                    <td>Artifactory Repository</td>
+                    <td>
+                        <a href="https://www.jfrog.com/open-source/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Jfrog</td>
+                    <td>5.5.2</td>
+                    <td>5.5.2</td>
+                </tr>
+                <!-- Jenkins -->
+                <tr>
+                    <td>Jenkins</td>
+                    <td>CI Tool</td>
+                    <td>
+                        <a href="https://jenkins.io/download/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Jenkins Community</td>
+                    <td>2.73.2</td>
+                    <td>2.73.2</td>
+                </tr>
+                <!-- Docker -->
+                <tr>
+                    <td>Docker</td>
+                    <td>Containerization</td>
+                    <td>
+                        <a href="https://www.docker.com/products/docker-toolbox" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td>Docker</td>
+                    <td>17.09.0-ce</td>
+                </tr>
+                <!-- DockerHub -->
+                <tr>
+                    <td>DockerHub</td>
+                    <td>Repository</td>
+                    <td>
+                        <a href="https://hub.docker.com/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Ansible -->
+                <tr>
+                    <td>Ansible</td>
+                    <td>Configuration Management Tool</td>
+                    <td>
+                        <a href="https://www.ansible.com/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Redhat</td>
+                    <td>2.4.0.0</td>
+                    <td>2.4.0.0</td>
+                </tr>
+                <!-- Chef -->
+                <tr>
+                    <td>Chef</td>
+                    <td>Configuration Management Tool</td>
+                    <td>
+                        <a href="https://downloads.chef.io/chefdk" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Puppet - Windows -->
+                <tr>
+                    <td>Puppet - Windows</td>
+                    <td>Configuration Management Tool</td>
+                    <td>
+                        <a href="https://puppet.com/docs/puppet/5.3/install_windows.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>5.3</td>
+                </tr>
+                <!-- Puppet - MAC -->
+                <tr>
+                    <td>Puppet - MAC</td>
+                    <td>Configuration Management Tool</td>
+                    <td>
+                        <a href="https://puppet.com/docs/puppet/5.3/install_osx.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>5.3</td>
+                </tr>
+                <!-- IBM Cloud -->
+                <tr>
+                    <td>IBM Cloud</td>
+                    <td>Platform as A Service</td>
+                    <td>
+                        <a href="https://console.ng.bluemix.net/" target="_blank" class="table-button">
+                            Register in Bluemix
+                        </a>
+                    </td>
+                    <td>IBM</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Python -->
+                <tr>
+                    <td>Python</td>
+                    <td>Scripting</td>
+                    <td>
+                        <a href="https://www.python.org/downloads/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Apache Groovy -->
+                <tr>
+                    <td>Apache Groovy</td>
+                    <td>Scripting</td>
+                    <td>
+                        <a href="http://groovy-lang.org/download.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- CloudFoundry -->
+                <tr>
+                    <td>CloudFoundry</td>
+                    <td>Client Tool</td>
+                    <td>
+                        <a href="https://github.com/cloudfoundry/cli/releases" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>Cloud Foundry</td>
+                    <td>6.32.0</td>
+                    <td>6.32.0</td>
+                </tr>
+                <!-- Bluemix CLI -->
+                <tr>
+                    <td>Bluemix CLI</td>
+                    <td>Client Tool</td>
+                    <td>
+                        <a href="https://console.bluemix.net/docs/cli/reference/bluemix_cli/all_versions.html#bluemix-cli-installer-all-versions" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>IBM</td>
+                    <td>0.6.1</td>
+                    <td>0.6.1</td>
+                </tr>
+                <!-- UrbanCode Deploy -->
+                <tr>
+                    <td>UrbanCode Deploy</td>
+                    <td>Deployment Tool</td>
+                    <td>
+                        <a href="" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td>IBM</td>
+                    <td>6.2.4.1.910750</td>
+                    <td>6.2.4.1.910750</td>
+                </tr>
+                <!-- AzureDevOps -->
+                <tr>
+                    <td>AzureDevOps (formerly VSTS)</td>
+                    <td>Platform as A Service</td>
+                    <td>
+                        <a href="https://aka.ms/SignupAzureDevOps" target="_blank" class="table-button">
+                            Register in AzureDevOps
+                        </a>
+                    </td>
+                    <td>AzureDevOps</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Slack -->
+                <tr>
+                    <td>Slack</td>
+                    <td>Team Collaboration</td>
+                    <td>
+                        <a href="https://slack.com/" target="_blank" class="table-button">
+                            Register in Slack
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- New Relic -->
+                <tr>
+                    <td>New Relic</td>
+                    <td>Application/Infra Monitoring</td>
+                    <td>
+                        <a href="https://newrelic.com/signup" target="_blank" class="table-button">
+                            SignUp in NewRelic
+                        </a>
+                    </td>
+                    <td>New Relic</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Grafana -->
+                <tr>
+                    <td>Grafana</td>
+                    <td>Application/Infra Monitoring</td>
+                    <td>
+                        <a href="https://grafana.com/signup" target="_blank" class="table-button">
+                            SignUp in Grafana
+                        </a>
+                    </td>
+                    <td>Grafana</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Site24X7 -->
+                <tr>
+                    <td>Site24X7</td>
+                    <td>Application/Infra Monitoring</td>
+                    <td>
+                        <a href="https://www.site24x7.com/signup.html?pack=44&l=en" target="_blank" class="table-button">
+                            SignUp in Site24X7
+                        </a>
+                    </td>
+                    <td>Site24X7</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- AppDynamics -->
+                <tr>
+                    <td>AppDynamics</td>
+                    <td>Application/Infra Monitoring</td>
+                    <td>
+                        <a href="https://www.appdynamics.com/community/register/" target="_blank" class="table-button">
+                            SignUp in AppDynamics
+                        </a>
+                    </td>
+                    <td>AppDynamics</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Nagios -->
+                <tr>
+                    <td>Nagios</td>
+                    <td>Application/Infra Monitoring</td>
+                    <td>
+                        <a href="https://www.nagios.com/downloads/nagios-xi/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Virtual Box -->
+                <tr>
+                    <td>Virtual Box</td>
+                    <td>Virtualization</td>
+                    <td>
+                        <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- VMware -->
+                <tr>
+                    <td>VMware</td>
+                    <td>Virtualization</td>
+                    <td>
+                        <a href="https://my.vmware.com/en/web/vmware/info/slug/desktop_end_user_computing/vmware_workstation_pro/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Vagrant -->
+                <tr>
+                    <td>Vagrant</td>
+                    <td>Virtualization</td>
+                    <td>
+                        <a href="https://www.vagrantup.com/downloads.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Terraform -->
+                <tr>
+                    <td>Terraform</td>
+                    <td>Infrastructure as Code (IaC)</td>
+                    <td>
+                        <a href="https://www.terraform.io/downloads.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Packer -->
+                <tr>
+                    <td>Packer</td>
+                    <td>VM Image Creation Tool</td>
+                    <td>
+                        <a href="https://packer.io/downloads.html" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- CentOS -->
+                <tr>
+                    <td>CentOS</td>
+                    <td>OS Image</td>
+                    <td>
+                        <a href="https://www.centos.org/download/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- Vault -->
+                <tr>
+                    <td>Vault</td>
+                    <td>Secrets Holder</td>
+                    <td>
+                        <a href="https://www.vaultproject.io/downloads/" target="_blank" class="table-button">
+                            Click Here
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Buy Me Coffee Button -->
+    <div class="footer">
+        <a class="bmc-button" target="_blank" href="https://buymeacoffee.com/puspendu">
+            <img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee">
+            <span style="margin-left:5px">Buy me a coffee</span>
+        </a>
+    </div>
+</body>
+</html>
